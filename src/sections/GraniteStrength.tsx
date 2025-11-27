@@ -27,12 +27,12 @@ export default function GraniteStrength() {
       </div>
       <div className="flex-1 relative h-[50vh] md:h-auto order-1 md:order-2">
         <img
-          src="https://images.unsplash.com/photo-1613529329153-294747201b22?q=80&w=1200&auto=format&fit=crop"
+          src="https://images.unsplash.com/photo-1621261329626-44477c7285a8?q=80&w=1200&auto=format&fit=crop"
           alt="Granite Texture"
-          className="absolute inset-0 w-full h-full object-cover grayscale contrast-125 brightness-75"
+          className="absolute inset-0 w-full h-full object-cover grayscale contrast-125"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-brand-gold/5 mix-blend-overlay" />
+        <div className="absolute inset-0 bg-gradient-to-r from-brand-dark to-transparent opacity-80" />
       </div>
     </section>
   )

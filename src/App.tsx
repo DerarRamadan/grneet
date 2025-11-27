@@ -10,6 +10,9 @@ import RawMaterial from './sections/RawMaterial'
 import Gallery from './sections/Gallery'
 import GraniteStrength from './sections/GraniteStrength'
 import Manufacturing from './sections/Manufacturing'
+import ProductsGrid from './sections/ProductsGrid'
+import ArtificialMarble from './sections/ArtificialMarble'
+import CustomWorks from './sections/CustomWorks'
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true)
@@ -32,9 +35,12 @@ export default function App() {
             <Philosophy />
             <Gallery />
             <GraniteStrength />
+            <ProductsGrid />
             <GlobalSourcing />
             <RawMaterial />
             <Manufacturing />
+            <ArtificialMarble />
+            <CustomWorks />
           </main>
           <Footer />
         </>

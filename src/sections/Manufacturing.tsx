@@ -15,17 +15,17 @@ export default function Manufacturing() {
             {
               title: 'قص الليزر و Waterjet',
               desc: 'دقة متناهية للحواف والزوايا المعقدة',
-              img: 'https://images.unsplash.com/photo-1626265774643-f194382584a3?q=80&w=600&auto=format&fit=crop',
+              img: 'https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?q=80&w=800&auto=format&fit=crop',
             },
             {
               title: 'معالجة الأسطح',
               desc: 'جلي وتلميع بأعلى المعايير العالمية',
-              img: 'https://images.unsplash.com/photo-1620023647483-39878203c9b7?q=80&w=600&auto=format&fit=crop',
+              img: 'https://images.unsplash.com/photo-1617005082133-548c4dd27f35?q=80&w=800&auto=format&fit=crop',
             },
             {
               title: 'التركيب',
               desc: 'فريق هندسي متخصص للتنفيذ في الموقع',
-              img: 'https://images.unsplash.com/photo-1618221639252-9c3f4a4c6883?q=80&w=600&auto=format&fit=crop',
+              img: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=800&auto=format&fit=crop',
             },
           ].map((item, i) => (
             <motion.div
