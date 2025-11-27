@@ -1,7 +1,7 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 
-const phrase = "Marble is not just stone. It is history, pressure, and time, forged over millions of years. At First Goal, we don't just supply material; we curate the Earth's finest art for your legacy."
+const phrase = "الرخام ليس مجرد حجر؛ إنه تاريخ، ضغط، وزمن صيغ عبر ملايين السنين. في شركة الهدف الأول، لا نبيع المواد فحسب، بل ننتقي لك أرقى كنوز الأرض لتبني إرثاً يدوم."
 
 export default function Philosophy() {
   const ref = useRef<HTMLDivElement | null>(null)
@@ -30,9 +30,9 @@ export default function Philosophy() {
 
   return (
     <section className="min-h-[80vh] flex items-center justify-center bg-brand-dark px-6 py-20">
-      <div ref={ref} className="max-w-4xl mx-auto text-center">
+      <div ref={ref} className="max-w-4xl mx-auto text-center rtl:text-center">
         <motion.div
-          className="flex flex-wrap justify-center gap-x-3 gap-y-2"
+          className="flex flex-wrap justify-center gap-x-2 gap-y-2 md:gap-x-4"
           variants={container}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
@@ -42,8 +42,8 @@ export default function Philosophy() {
               key={index}
               variants={child}
               className={`${
-                word === 'First' || word === 'Goal,' ? 'text-brand-gold' : 'text-brand-stone'
-              } text-3xl md:text-5xl lg:text-6xl font-serif leading-tight`}
+                word.includes('الهدف') || word.includes('الأول') ? 'text-brand-gold' : 'text-brand-stone'
+              } text-3xl md:text-5xl lg:text-6xl font-serif leading-relaxed`}
             >
               {word}
             </motion.span>

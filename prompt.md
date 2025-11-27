@@ -1,308 +1,220 @@
-. Update index.html (Enable RTL)
-File: index.html
-Change the html tag to include dir="rtl" and lang="ar". This automatically flips the layout (Left 
-↔
-↔
- Right).
-code
-Html
-<!doctype html>
-<html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>الهدف الأول للرخام والجرانيت</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
-2. Update Fonts & CSS
-File: src/index.css
-We will replace the English fonts with 'Amiri' (for Headlines/Serif) and 'Tajawal' (for Body/Sans).
-code
-CSS
-@import "tailwindcss";
-/* Importing Arabic Fonts: Amiri (Luxury Serif) and Tajawal (Modern Sans) */
-@import url("https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700;800&display=swap");
-
-@theme {
-  --color-brand-dark: #0a0a0a;
-  --color-brand-charcoal: #1a1a1a;
-  --color-brand-gold: #D4AF37;
-  --color-brand-gold-light: #F4E5B8;
-  --color-brand-stone: #E6E6E6;
-  
-  /* Update Font mappings */
-  --font-serif: "Amiri", serif;
-  --font-sans: "Tajawal", sans-serif;
-}
-
-html,
-body,
-#root {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  background-color: var(--color-brand-dark);
-  color: var(--color-brand-stone);
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #0a0a0a;
-}
-::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #D4AF37;
-}
-3. Translate Navbar
-File: src/components/layout/Navbar.tsx
+Create the Components
+Copy these files into src/sections/.
+1. src/sections/Gallery.tsx
+(A luxurious horizontal scroll gallery for your products).
 code
 Tsx
-export default function Navbar() {
-  return (
-    <header className="fixed top-0 left-0 right-0 z-40 w-full bg-brand-dark/10 backdrop-blur-md border-b border-white/5 transition-all duration-300">
-      <div className="mx-auto max-w-7xl px-6 py-5 flex items-center justify-between">
-        {/* Logo */}
-        <span className="font-serif text-3xl font-bold text-brand-gold tracking-widest cursor-pointer">
-          الهدف الأول
-        </span>
-        
-        {/* Menu - RTL automatically handles the order */}
-        <nav className="hidden md:flex items-center gap-8 text-base font-medium text-brand-stone/90 font-sans">
-          <a href="#home" className="hover:text-brand-gold transition-colors">الرئيسية</a>
-          <a href="#collection" className="hover:text-brand-gold transition-colors">منتجاتنا</a>
-          <a href="#projects" className="hover:text-brand-gold transition-colors">مشاريعنا</a>
-          
-          <a
-            href="#contact"
-            className="px-6 py-2 rounded-sm border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-black transition-all duration-300 font-bold"
-          >
-            اطلب استشارة
-          </a>
-        </nav>
-      </div>
-    </header>
-  )
-}
-4. Translate Hero Section
-File: src/sections/Hero.tsx
-code
-Tsx
-import { motion } from 'framer-motion'
-
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.2 },
-  },
-}
-
-const item = {
-  hidden: { opacity: 0, y: 50 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.8 } },
-}
-
-export default function Hero() {
-  return (
-    <section id="home" className="relative h-screen w-full overflow-hidden">
-      {/* Background Video */}
-      <video
-        className="absolute inset-0 w-full h-full object-cover opacity-80"
-        autoPlay
-        loop
-        muted
-        playsInline
-        src="https://cdn.pixabay.com/video/2019/05/21/23793-338276064_large.mp4" 
-      />
-      
-      <div className="absolute inset-0 bg-black/50" />
-
-      <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center">
-        <motion.div variants={container} initial="hidden" animate="show">
-          <motion.h1 
-            variants={item} 
-            className="font-serif text-5xl md:text-8xl lg:text-9xl text-white font-bold tracking-tight leading-tight"
-          >
-            حيث تلتقي صلابة الأرض<br />
-            <span className="text-brand-gold">بفن العمارة</span>
-          </motion.h1>
-          <motion.div variants={item} className="mt-8 flex flex-col items-center gap-4">
-            <p className="font-sans text-xl md:text-2xl text-gray-200 max-w-3xl">
-              الهدف الأول: نعيد صياغة مفهوم الفخامة في ليبيا
-            </p>
-            <div className="h-16 w-[1px] bg-brand-gold/50 mt-8"></div>
-          </motion.div>
-        </motion.div>
-      </div>
-    </section>
-  )
-}
-5. Translate Philosophy
-File: src/sections/Philosophy.tsx
-code
-Tsx
-import { motion, useInView } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 
-const phrase = "الرخام ليس مجرد حجر؛ إنه تاريخ، ضغط، وزمن صيغ عبر ملايين السنين. في شركة الهدف الأول، لا نبيع المواد فحسب، بل ننتقي لك أرقى كنوز الأرض لتبني إرثاً يدوم."
+const products = [
+  { id: 1, name: "بيانكو كرارا", category: "إيطالي", img: "https://images.unsplash.com/photo-1618221639252-9c3f4a4c6883?q=80&w=800&auto=format&fit=crop" },
+  { id: 2, name: "إمبرادور غامق", category: "إسباني", img: "https://images.unsplash.com/photo-1615800098779-1be32e60cca3?q=80&w=800&auto=format&fit=crop" },
+  { id: 3, name: "ترافرتين سلفر", category: "تركي", img: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=800&auto=format&fit=crop" },
+  { id: 4, name: "بورتورو جولد", category: "نادر", img: "https://images.unsplash.com/photo-1617791160588-241658c0f566?q=80&w=800&auto=format&fit=crop" },
+  { id: 5, name: "كلكتا جولد", category: "إيطالي", img: "https://images.unsplash.com/photo-1595428774223-ef52624120d2?q=80&w=800&auto=format&fit=crop" },
+]
 
-export default function Philosophy() {
-  const ref = useRef<HTMLDivElement | null>(null)
-  const isInView = useInView(ref, { once: true, margin: '-10%' })
+export default function Gallery() {
+  const targetRef = useRef<HTMLDivElement | null>(null)
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+  })
 
-  const words = phrase.split(' ')
-
-  const container = {
-    hidden: { opacity: 0 },
-    visible: (i = 1) => ({
-      opacity: 1,
-      transition: { staggerChildren: 0.12, delayChildren: 0.04 * i },
-    }),
-  }
-
-  const child = {
-    visible: { opacity: 1, y: 0 },
-    hidden: { opacity: 0, y: 20 },
-  }
+  // RTL Transform: We move from 0 to Positive X to scroll "Leftwards" visually in RTL context
+  // Or standard negative X if we want to pull items. Let's use standard negative to pull content.
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-75%"])
 
   return (
-    <section className="min-h-[80vh] flex items-center justify-center bg-brand-dark px-6 py-20">
-      <div ref={ref} className="max-w-4xl mx-auto text-center rtl:text-center">
-        <motion.div
-          className="flex flex-wrap justify-center gap-x-2 gap-y-2 md:gap-x-4"
-          variants={container}
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-        >
-          {words.map((word, index) => (
-            <motion.span
-              key={index}
-              variants={child}
-              className={`${
-                word.includes('الهدف') || word.includes('الأول') ? 'text-brand-gold' : 'text-brand-stone'
-              } text-3xl md:text-5xl lg:text-6xl font-serif leading-relaxed`}
+    <section ref={targetRef} className="relative h-[300vh] bg-brand-charcoal">
+      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+        
+        {/* Title Overlay */}
+        <div className="absolute top-10 right-10 z-10">
+          <h3 className="text-4xl md:text-6xl font-serif text-brand-gold">مجموعتنا المختارة</h3>
+          <p className="text-brand-stone mt-2 font-sans">لمسة من الفخامة لكل زاوية</p>
+        </div>
+
+        <motion.div style={{ x }} className="flex gap-10 pr-20">
+          {products.map((product) => (
+            <div 
+              key={product.id} 
+              className="group relative h-[60vh] w-[400px] flex-shrink-0 overflow-hidden rounded-sm border border-white/10 bg-brand-dark"
             >
-              {word}
-            </motion.span>
+              <img 
+                src={product.img} 
+                alt={product.name} 
+                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent opacity-60" />
+              <div className="absolute bottom-0 right-0 p-6">
+                <p className="text-brand-gold text-sm font-sans mb-1">{product.category}</p>
+                <h4 className="text-white text-3xl font-serif">{product.name}</h4>
+              </div>
+            </div>
           ))}
         </motion.div>
       </div>
     </section>
   )
 }
-6. Translate Global Sourcing
-File: src/sections/GlobalSourcing.tsx
-Note: Since it's a map, keep ltr for the map container if using absolute positioning based on left/top, OR adjust logic. Usually, keeping the map visual logic as is but changing text is safer.
+2. src/sections/GraniteStrength.tsx
+(Split screen showing the toughness of Granite).
 code
 Tsx
 import { motion } from 'framer-motion'
-import { useState } from 'react'
 
-const locations = [
-  { id: 1, country: 'إيطاليا', top: '32%', left: '51%', material: 'كرارا & ستواريو' },
-  { id: 2, country: 'إسبانيا', top: '34%', left: '47%', material: 'كريما مارفل' },
-  { id: 3, country: 'تركيا', top: '35%', left: '55%', material: 'رخام رمادي' },
-  { id: 4, country: 'الهند', top: '42%', left: '68%', material: 'جرانيت أسود' },
-  { id: 5, country: 'مصر', top: '40%', left: '54%', material: 'جلالة & صني' },
-  { id: 6, country: 'عمان', top: '43%', left: '58%', material: 'بيج عماني' },
-]
-
-export default function GlobalSourcing() {
-  const [activeId, setActiveId] = useState<number | null>(null)
-
+export default function GraniteStrength() {
   return (
-    <section className="relative h-screen bg-brand-charcoal overflow-hidden flex flex-col items-center justify-center">
-      <div className="absolute top-10 z-10 text-center">
-        <h2 className="text-brand-gold font-serif text-4xl tracking-wide">نستورد من العالم</h2>
-        <p className="text-brand-stone/60 font-sans text-lg mt-2">من قلب المحاجر العالمية إلى طرابلس</p>
-      </div>
-
-      <div className="relative w-full max-w-6xl aspect-[1.8/1] opacity-80" dir="ltr">
-        {/* Background Map */}
-        <div className="absolute inset-0 bg-[url('https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg')] bg-no-repeat bg-contain bg-center opacity-20 invert grayscale"></div>
-
-        {locations.map((loc) => (
-          <div
-            key={loc.id}
-            className="absolute group cursor-pointer"
-            style={{ top: loc.top, left: loc.left }}
-            onMouseEnter={() => setActiveId(loc.id)}
-            onMouseLeave={() => setActiveId(null)}
+    <section className="relative flex flex-col md:flex-row min-h-screen bg-brand-dark">
+      
+      {/* Text Side */}
+      <div className="flex-1 flex items-center justify-center p-12 md:p-24 order-2 md:order-1">
+        <div className="max-w-xl">
+          <motion.h2 
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-5xl md:text-7xl font-serif text-white mb-8"
           >
-            <div className="absolute -inset-2 bg-brand-gold/30 rounded-full animate-ping"></div>
-            <div className="relative w-3 h-3 bg-brand-gold rounded-full shadow-[0_0_10px_#D4AF37]"></div>
+            صلابة <br />
+            <span className="text-brand-stone/50">تتحدى الزمن</span>
+          </motion.h2>
+          
+          <p className="text-xl text-brand-stone/80 font-sans leading-loose mb-8">
+            الجرانيت هو الخيار الأمثل للواجهات الخارجية والأماكن ذات الحركة الكثيفة. 
+            في "الهدف الأول"، نوفر لك جرانيت عالي الكثافة يقاوم العوامل الجوية، الحرارة، والخدش، 
+            ليظل محافظاً على رونقه لعقود.
+          </p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: activeId === loc.id ? 1 : 0, y: activeId === loc.id ? -10 : 10 }}
-              className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-40 bg-black/90 border border-brand-gold/30 p-3 rounded text-center pointer-events-none z-20"
+          <ul className="grid grid-cols-2 gap-4 font-sans text-brand-gold">
+            <li className="flex items-center gap-2">
+              <span className="w-2 h-2 bg-brand-gold rounded-full" /> مقاوم للحرارة
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="w-2 h-2 bg-brand-gold rounded-full" /> لا يمتص السوائل
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="w-2 h-2 bg-brand-gold rounded-full" /> صلابة الماس
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="w-2 h-2 bg-brand-gold rounded-full" /> ألوان طبيعية
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Image Side */}
+      <div className="flex-1 relative h-[50vh] md:h-auto order-1 md:order-2">
+        <img 
+          src="https://images.unsplash.com/photo-1621261329626-44477c7285a8?q=80&w=1000&auto=format&fit=crop" 
+          alt="Granite Texture" 
+          className="absolute inset-0 w-full h-full object-cover grayscale contrast-125"
+        />
+        <div className="absolute inset-0 bg-brand-gold/10 mix-blend-overlay" />
+      </div>
+
+    </section>
+  )
+}
+3. src/sections/Manufacturing.tsx
+(Video background showing the machines).
+code
+Tsx
+import { motion } from 'framer-motion'
+
+export default function Manufacturing() {
+  return (
+    <section className="relative py-32 bg-brand-charcoal overflow-hidden">
+      <div className="mx-auto max-w-7xl px-6 relative z-10">
+        
+        <div className="flex flex-col md:flex-row items-end justify-between mb-16 border-b border-brand-stone/10 pb-8">
+          <h2 className="text-4xl md:text-6xl font-serif text-white">
+            دقة التصنيع
+          </h2>
+          <p className="text-brand-stone/60 font-sans mt-4 md:mt-0 max-w-md">
+            نستخدم أحدث تقنيات القص (CNC) و (Waterjet) لضمان مقاسات دقيقة وتشطيبات خالية من العيوب.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[
+            { title: "قص الليزر", desc: "دقة متناهية للحواف والزوايا", img: "https://images.unsplash.com/photo-1565624707425-4a25a94379e4?q=80&w=600&auto=format&fit=crop" },
+            { title: "معالجة الأسطح", desc: "جلي وتلميع بأعلى المعايير", img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=600&auto=format&fit=crop" },
+            { title: "التركيب", desc: "فريق هندسي متخصص للتنفيذ", img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=600&auto=format&fit=crop" }
+          ].map((item, i) => (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.2 }}
+              className="group cursor-pointer"
             >
-              <h4 className="text-brand-gold font-serif text-lg">{loc.country}</h4>
-              <p className="text-white/70 text-xs font-sans mt-1">{loc.material}</p>
+              <div className="h-64 overflow-hidden rounded-sm mb-4">
+                <img src={item.img} alt={item.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+              </div>
+              <h3 className="text-2xl font-serif text-brand-gold mb-2">{item.title}</h3>
+              <p className="text-brand-stone/70 font-sans text-sm">{item.desc}</p>
             </motion.div>
-          </div>
-        ))}
+          ))}
+        </div>
+
       </div>
     </section>
   )
 }
-7. Translate Raw Material
-File: src/sections/RawMaterial.tsx
+Step 2: Update App.tsx
+Now, update your main App file to include these new sections in the correct order.
 code
 Tsx
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef } from 'react'
+import { useEffect, useState } from 'react'
+import { AnimatePresence } from 'framer-motion'
+import Preloader from './components/layout/Preloader'
+import Navbar from './components/layout/Navbar'
+import Footer from './components/layout/Footer'
+import Hero from './sections/Hero'
+import Philosophy from './sections/Philosophy'
+import GlobalSourcing from './sections/GlobalSourcing'
+import RawMaterial from './sections/RawMaterial'
+// Import new sections
+import Gallery from './sections/Gallery'
+import GraniteStrength from './sections/GraniteStrength'
+import Manufacturing from './sections/Manufacturing'
 
-export default function RawMaterial() {
-  const containerRef = useRef<HTMLDivElement | null>(null)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start end', 'end start'],
-  })
+export default function App() {
+  const [isLoading, setIsLoading] = useState(true)
 
-  const y = useTransform(scrollYProgress, [0, 1], ['-20%', '20%'])
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.9, 1], [0, 1, 1, 0])
+  useEffect(() => {
+    // Simulate loading time
+    const t = setTimeout(() => setIsLoading(false), 2500)
+    return () => clearTimeout(t)
+  }, [])
 
   return (
-    <section ref={containerRef} className="relative h-[80vh] w-full overflow-hidden flex items-center justify-center bg-brand-dark">
-      <motion.div style={{ y }} className="absolute inset-0 z-0">
-        <img
-          src="https://images.unsplash.com/photo-1599815049514-a952d7d8e8a6?q=80&w=2070&auto=format&fit=crop"
-          alt="محجر رخام"
-          className="w-full h-[120%] object-cover brightness-50"
-          loading="lazy"
-        />
-      </motion.div>
+    <div className="min-h-screen bg-brand-dark">
+      <AnimatePresence mode="wait">
+        {isLoading && <Preloader visible={isLoading} />}
+      </AnimatePresence>
 
-      <motion.div style={{ opacity }} className="relative z-10 text-center p-8 md:p-12 border border-white/10 bg-black/40 backdrop-blur-md max-w-3xl mx-4">
-        <h2 className="text-5xl md:text-8xl font-serif text-white font-bold tracking-tighter">
-          قوة الخام
-        </h2>
-        <p className="mt-6 text-brand-stone/90 text-lg md:text-2xl font-sans leading-relaxed">
-          مستخرجة من قلب الجبال.. نقية، صلبة، وجاهزة لنصنع منها إرثاً معمارياً.
-        </p>
-      </motion.div>
-    </section>
+      {!isLoading && (
+        <>
+          <Navbar />
+          <main>
+            <Hero />
+            <Philosophy />
+            <Gallery /> {/* Horizontal Scroll */}
+            <GraniteStrength />
+            <GlobalSourcing />
+            <RawMaterial />
+            <Manufacturing />
+          </main>
+          <Footer />
+        </>
+      )}
+    </div>
   )
 }
-8. Translate Preloader
-File: src/components/layout/Preloader.tsx
-Update the text "FIRST GOAL" to "الهدف الأول".
-code
-Tsx
-// Inside the component...
-<motion.h1 ...>
-  الهدف الأول
-</motion.h1>
-Run the project now. The site will be Right-to-Left, using beautiful Arabic typography (Amiri and Tajawal), with all content localized for the Libyan market.
+Note on Images:
+I have used Unsplash links in this code. They are free, high-quality, and generally reliable. If you still don't see them:
+Check if your internet blocks Unsplash.
+Or download images manually, put them in public/assets/, and change the src paths in the code from https://... to /assets/image-name.jpg.

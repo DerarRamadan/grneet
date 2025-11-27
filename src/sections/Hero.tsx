@@ -29,15 +29,15 @@ export default function Hero() {
         <motion.div variants={container} initial="hidden" animate="show">
           <motion.h1
             variants={item}
-            className="font-serif text-5xl md:text-7xl lg:text-9xl text-white font-bold tracking-tight"
+            className="font-serif text-5xl md:text-8xl lg:text-9xl text-white font-bold tracking-tight leading-tight"
           >
-            Nature’s Masterpiece.
+            حيث تلتقي صلابة الأرض
             <br />
-            <span className="text-brand-gold italic">Refined.</span>
+            <span className="text-brand-gold">بفن العمارة</span>
           </motion.h1>
           <motion.div variants={item} className="mt-8 flex flex-col items-center gap-4">
-            <p className="font-sans text-lg md:text-xl text-gray-300 max-w-2xl">
-              Leading Marble & Granite Industry in Libya.
+            <p className="font-sans text-xl md:text-2xl text-gray-200 max-w-3xl">
+              الهدف الأول: نعيد صياغة مفهوم الفخامة في ليبيا
             </p>
             <div className="h-16 w-[1px] bg-brand-gold/50 mt-8"></div>
           </motion.div>

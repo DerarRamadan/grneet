@@ -16,19 +16,19 @@ export default function RawMaterial() {
       <div className="absolute inset-0 z-0 bg-gradient-radial from-brand-charcoal to-brand-dark" />
       <motion.div style={{ y }} className="absolute inset-0 z-0">
         <img
-          src="/assets/quarry.jpg"
-          alt="Marble Quarry"
+          src="https://images.unsplash.com/photo-1599815049514-a952d7d8e8a6?q=80&w=2070&auto=format&fit=crop"
+          alt="محجر رخام"
           className="w-full h-[120%] object-cover brightness-50"
           loading="lazy"
         />
       </motion.div>
 
       <motion.div style={{ opacity }} className="relative z-10 text-center p-8 md:p-12 border border-white/10 bg-black/40 backdrop-blur-md max-w-3xl mx-4">
-        <h2 className="text-5xl md:text-8xl font-serif text-white font-bold uppercase tracking-tighter">
-          Raw Power
+        <h2 className="text-5xl md:text-8xl font-serif text-white font-bold tracking-tighter">
+          قوة الخام
         </h2>
-        <p className="mt-6 text-brand-stone/90 text-lg md:text-xl font-sans leading-relaxed">
-          Extracted from the heart of the mountains. Unprocessed, pure, and ready to be shaped into legacy.
+        <p className="mt-6 text-brand-stone/90 text-lg md:text-2xl font-sans leading-relaxed">
+          مستخرجة من قلب الجبال.. نقية، صلبة، وجاهزة لنصنع منها إرثاً معمارياً.
         </p>
       </motion.div>
     </section>

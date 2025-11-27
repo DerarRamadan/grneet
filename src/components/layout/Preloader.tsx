@@ -21,7 +21,7 @@ export default function Preloader({ visible }: PreloaderProps) {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             >
-              FIRST GOAL
+              الهدف الأول
             </motion.h1>
 
             <motion.div
