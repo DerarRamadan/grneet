@@ -1,49 +1,64 @@
+import { motion } from 'framer-motion'
+
 export default function Footer() {
   return (
-    <footer id="contact" className="bg-brand-dark text-brand-stone pt-24 pb-10 border-t border-brand-gold/20">
+    <footer id="contact" className="bg-black text-white pt-24 pb-8 border-t border-brand-gold/30">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-12">
           <div className="text-right">
-            <h2 className="text-5xl md:text-7xl font-serif text-white mb-8 leading-tight">
+            <h2 className="text-6xl md:text-8xl font-serif mb-6 leading-tight">
               لنبنِ شيئاً <br />
               <span className="text-brand-gold">خالداً.</span>
             </h2>
-            <a
-              href="https://wa.me/218917080090"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-4 text-xl md:text-2xl border-b border-brand-gold pb-2 transition-colors group"
-            >
-              <span className="group-hover:-translate-x-2 transition-transform duration-300">↗</span>
-              تواصل معنا عبر واتساب
-            </a>
+            <p className="text-brand-stone/60 font-sans text-lg max-w-md">
+              نحن هنا لتحويل رؤيتك المعمارية إلى واقع ملموس بأجود أنواع الحجر الطبيعي.
+            </p>
           </div>
-          <div className="flex flex-col justify-end items-start lg:items-end text-right space-y-8 font-sans">
-            <div className="w-full lg:w-auto">
-              <h4 className="text-brand-gold text-sm font-bold mb-2">العنوان</h4>
-              <p className="text-xl text-white">ليبيا، طرابلس</p>
-              <p className="text-brand-stone/60">طريق السكة، بالقرب من...</p>
+          <motion.a
+            href="https://wa.me/218917080090"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-brand-gold text-black px-8 py-4 rounded-sm font-bold text-xl flex items-center gap-3 hover:bg-white transition-colors"
+          >
+            <span>↗</span> تواصل معنا عبر واتساب
+          </motion.a>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-white/10 pt-16 mb-16">
+          <div className="text-right">
+            <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 ml-auto">
+              <span className="text-2xl">📍</span>
             </div>
-            <div className="w-full lg:w-auto">
-              <h4 className="text-brand-gold text-sm font-bold mb-2">الهاتف</h4>
-              <div className="flex flex-col items-end gap-1" dir="ltr">
-                <a href="tel:+218917080090" className="text-xl text-white transition-colors hover:text-brand-gold">+218 91 708 0090</a>
-                <a href="tel:+218927080090" className="text-xl text-white transition-colors hover:text-brand-gold">+218 92 708 0090</a>
-              </div>
+            <h4 className="text-brand-gold font-bold text-lg mb-4">العنوان</h4>
+            <p className="text-brand-stone/80 text-lg leading-relaxed font-sans">
+              ليبيا، طرابلس <br />
+              طريق السكة، بالقرب من رئاسة الوزراء
+            </p>
+          </div>
+          <div className="text-right">
+            <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 ml-auto">
+              <span className="text-2xl">📞</span>
             </div>
-            <div className="w-full lg:w-auto">
-              <h4 className="text-brand-gold text-sm font-bold mb-2">البريد الإلكتروني</h4>
-              <a href="mailto:info@firstgoal.ly" className="text-xl text-white transition-colors hover:text-brand-gold">info@firstgoal.ly</a>
+            <h4 className="text-brand-gold font-bold text-lg mb-4">أرقام التواصل</h4>
+            <div className="flex flex-col gap-2 font-sans text-lg text-brand-stone/80" dir="ltr">
+              <a href="tel:+218917080090" className="hover:text-white text-right transition-colors">+218 91 708 0090</a>
+              <a href="tel:+218927080090" className="hover:text-white text-right transition-colors">+218 92 708 0090</a>
             </div>
+          </div>
+          <div className="text-right">
+            <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 ml-auto">
+              <span className="text-2xl">✉️</span>
+            </div>
+            <h4 className="text-brand-gold font-bold text-lg mb-4">البريد الإلكتروني</h4>
+            <a href="mailto:info@firstgoal.ly" className="text-brand-stone/80 text-lg font-sans hover:text-white transition-colors">info@firstgoal.ly</a>
           </div>
         </div>
-        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-sm opacity-60 font-sans">
-          <p className="order-2 md:order-1 mt-4 md:mt-0">© 2025 الهدف الأول للرخام والجرانيت. جميع الحقوق محفوظة.</p>
-          <div className="flex gap-8 order-1 md:order-2">
-            <a href="#" className="transition-colors hover:text-brand-gold">Instagram</a>
-            <a href="#" className="transition-colors hover:text-brand-gold">Facebook</a>
-            <a href="#" className="transition-colors hover:text-brand-gold">LinkedIn</a>
+        <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 text-sm text-brand-stone/40 font-sans">
+          <div className="flex gap-6 mb-4 md:mb-0">
+            <a href="#" className="hover:text-brand-gold">Instagram</a>
+            <a href="#" className="hover:text-brand-gold">Facebook</a>
+            <a href="#" className="hover:text-brand-gold">LinkedIn</a>
           </div>
+          <p>© 2025 الهدف الأول للرخام والجرانيت. جميع الحقوق محفوظة.</p>
         </div>
       </div>
     </footer>
