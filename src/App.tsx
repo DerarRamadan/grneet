@@ -5,6 +5,7 @@ import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import Hero from './sections/Hero'
 import Philosophy from './sections/Philosophy'
+import Vision from './sections/Vision'
 import GlobalSourcing from './sections/GlobalSourcing'
 import RawMaterial from './sections/RawMaterial'
 import Gallery from './sections/Gallery'
@@ -13,6 +14,9 @@ import Manufacturing from './sections/Manufacturing'
 import ProductsGrid from './sections/ProductsGrid'
 import ArtificialMarble from './sections/ArtificialMarble'
 import CustomWorks from './sections/CustomWorks'
+import Projects from './sections/Projects'
+import Clients from './sections/Clients'
+import Sustainability from './sections/Sustainability'
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true)
@@ -33,14 +37,18 @@ export default function App() {
           <main>
             <Hero />
             <Philosophy />
+            <Vision />
             <Gallery />
             <GraniteStrength />
             <ProductsGrid />
+            <ArtificialMarble />
             <GlobalSourcing />
             <RawMaterial />
             <Manufacturing />
-            <ArtificialMarble />
             <CustomWorks />
+            <Projects />
+            <Clients />
+            <Sustainability />
           </main>
           <Footer />
         </>
