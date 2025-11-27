@@ -1,35 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from 'react'
+import { AnimatePresence } from 'framer-motion'
+import Preloader from './components/layout/Preloader'
+import Navbar from './components/layout/Navbar'
+import Footer from './components/layout/Footer'
+import Hero from './sections/Hero'
+import Philosophy from './sections/Philosophy'
+import GlobalSourcing from './sections/GlobalSourcing'
+import RawMaterial from './sections/RawMaterial'
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const t = setTimeout(() => setIsLoading(false), 2500)
+    return () => clearTimeout(t)
+  }, [])
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="min-h-screen">
+      <AnimatePresence mode="wait">
+        {isLoading && <Preloader visible={isLoading} />}
+      </AnimatePresence>
+      {!isLoading && (
+        <>
+          <Navbar />
+          <main>
+            <Hero />
+            <Philosophy />
+            <GlobalSourcing />
+            <RawMaterial />
+          </main>
+          <Footer />
+        </>
+      )}
+    </div>
   )
 }
-
-export default App
