@@ -15,7 +15,7 @@ const item = {
 
 export default function Hero() {
   return (
-    <section id="home" className="relative h-screen w-full overflow-hidden">
+    <section id="home" className="relative h-screen w-full overflow-hidden pt-24 md:pt-32 scroll-mt-24 md:scroll-mt-32">
       <video
         className="absolute inset-0 w-full h-full object-cover opacity-60"
         autoPlay
