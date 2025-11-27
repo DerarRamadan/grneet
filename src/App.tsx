@@ -7,6 +7,9 @@ import Hero from './sections/Hero'
 import Philosophy from './sections/Philosophy'
 import GlobalSourcing from './sections/GlobalSourcing'
 import RawMaterial from './sections/RawMaterial'
+import Gallery from './sections/Gallery'
+import GraniteStrength from './sections/GraniteStrength'
+import Manufacturing from './sections/Manufacturing'
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true)
@@ -27,8 +30,11 @@ export default function App() {
           <main>
             <Hero />
             <Philosophy />
+            <Gallery />
+            <GraniteStrength />
             <GlobalSourcing />
             <RawMaterial />
+            <Manufacturing />
           </main>
           <Footer />
         </>
