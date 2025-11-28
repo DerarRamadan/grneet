@@ -26,6 +26,7 @@ body {
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-y;
+  scroll-snap-type: y mandatory;
 }
 
 ::-webkit-scrollbar {

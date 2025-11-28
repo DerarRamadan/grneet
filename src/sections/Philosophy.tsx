@@ -29,7 +29,13 @@ export default function Philosophy() {
   }
 
   return (
-    <section className="min-h-auto md:min-h-[60vh] flex items-center justify-center bg-brand-dark px-6 py-16 md:py-32">
+    <motion.section
+      className="h-[100dvh] flex items-center justify-center bg-brand-dark px-6 py-16 md:py-32 snap-start"
+      initial={{ opacity: 0, scale: 0.98 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true, amount: 0.6 }}
+    >
       <div ref={ref} className="max-w-4xl mx-auto text-center rtl:text-center">
         <motion.div
           className="flex flex-wrap justify-center gap-x-1.5 gap-y-2 md:gap-x-4"
@@ -50,6 +56,6 @@ export default function Philosophy() {
           ))}
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   )
 }
