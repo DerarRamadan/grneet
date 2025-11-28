@@ -1,12 +1,16 @@
 import { motion } from 'framer-motion'
+import p1 from '../assets/images/projects-1.webp'
+import p2 from '../assets/images/projects-2.webp'
+import p3 from '../assets/images/projects-3.webp'
+import p4 from '../assets/images/projects-4.webp'
 
 type Project = { id: number; title: string; location: string; img: string }
 
 const projects: Project[] = [
-  { id: 1, title: 'فندق ريكسوس', location: 'طرابلس', img: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1200&auto=format&fit=crop' },
-  { id: 2, title: 'فيلا خاصة', location: 'بنغازي', img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200&auto=format&fit=crop' },
-  { id: 3, title: 'مجمع إداري', location: 'مصراتة', img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1200&auto=format&fit=crop' },
-  { id: 4, title: 'قصر الضيافة', location: 'طرابلس', img: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1200&auto=format&fit=crop' },
+  { id: 1, title: 'فندق ريكسوس', location: 'طرابلس', img: p1 },
+  { id: 2, title: 'فيلا خاصة', location: 'بنغازي', img: p2 },
+  { id: 3, title: 'مجمع إداري', location: 'مصراتة', img: p3 },
+  { id: 4, title: 'قصر الضيافة', location: 'طرابلس', img: p4 },
 ]
 
 export default function Projects() {
@@ -35,7 +39,7 @@ function Card({ project, index }: { project: Project; index: number }) {
       className="sticky top-24 bg-brand-charcoal border border-white/5 rounded-lg overflow-hidden shadow-2xl h-[500px] flex flex-col md:flex-row"
     >
       <div className="w-full md:w-1/2 h-64 md:h-full relative">
-        <img src={project.img} alt={project.title} className="w-full h-full object-cover" />
+        <img src={project.img} alt={`مشروع ${project.title} في ${project.location}`} className="w-full h-full object-cover" loading="lazy" />
         <div className="absolute inset-0 bg-black/20" />
       </div>
       <div className="w-full md:w-1/2 p-8 flex flex-col justify-center text-right bg-brand-charcoal">
