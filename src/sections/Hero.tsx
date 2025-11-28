@@ -1,4 +1,7 @@
 import { motion } from 'framer-motion'
+import heroPoster from '../assets/images/here-poster.webp'
+import heroWebm from '../assets/video/hero.webm'
+import heroMp4 from '../assets/video/hero.mp4'
 
 const container = {
   hidden: { opacity: 0 },
@@ -9,37 +12,40 @@ const container = {
 }
 
 const item = {
-  hidden: { opacity: 0, y: 50 },
+  hidden: { opacity: 0, y: 30 },
   show: { opacity: 1, y: 0, transition: { duration: 0.8 } },
 }
 
 export default function Hero() {
   return (
-    <section id="home" className="relative h-screen w-full overflow-hidden pt-24 md:pt-32 scroll-mt-24 md:scroll-mt-32">
+    <section id="home" className="relative h-[85vh] md:h-screen w-full overflow-hidden">
       <video
-        className="absolute inset-0 w-full h-full object-cover opacity-60"
         autoPlay
         loop
         muted
         playsInline
-        src="https://cdn.pixabay.com/video/2020/05/25/40156-424930064_large.mp4"
-      />
-      <div className="absolute inset-0 bg-black/60" />
+        poster={heroPoster}
+        className="absolute inset-0 w-full h-full object-cover"
+      >
+        <source src={heroWebm} type="video/webm" />
+        <source src={heroMp4} type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 bg-black/50" />
       <div className="relative z-10 h-full flex flex-col items-center justify-center px-4 text-center">
         <motion.div variants={container} initial="hidden" animate="show" className="max-w-5xl">
           <motion.h1
             variants={item}
-            className="font-serif text-5xl md:text-7xl lg:text-8xl text-white font-bold tracking-normal leading-tight md:leading-snug"
+            className="font-serif text-5xl md:text-8xl text-white font-bold tracking-normal leading-tight"
           >
             حيث تلتقي صلابة الأرض
             <br />
             <span className="text-brand-gold">بفن العمارة</span>
           </motion.h1>
           <motion.div variants={item} className="mt-6 md:mt-10 flex flex-col items-center gap-6">
-            <p className="font-sans text-lg md:text-2xl text-gray-200 max-w-3xl leading-relaxed">
+            <p className="font-sans text-lg md:text-2xl text-gray-200 max-w-2xl leading-relaxed">
               الهدف الأول: نعيد صياغة مفهوم الفخامة في ليبيا
             </p>
-            <div className="h-12 md:h-20 w-[1px] bg-brand-gold/50 mt-4"></div>
+            <div className="h-16 w-[1px] bg-gradient-to-b from-brand-gold to-transparent mt-4 animate-pulse"></div>
           </motion.div>
         </motion.div>
       </div>

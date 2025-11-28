@@ -13,7 +13,7 @@ export default function Philosophy() {
     hidden: { opacity: 0 },
     visible: (i = 1) => ({
       opacity: 1,
-      transition: { staggerChildren: 0.12, delayChildren: 0.04 * i },
+      transition: { staggerChildren: 0.08, delayChildren: 0.02 * i },
     }),
   }
 
@@ -29,10 +29,10 @@ export default function Philosophy() {
   }
 
   return (
-    <section className="min-h-[80vh] flex items-center justify-center bg-brand-dark px-6 py-20">
+    <section className="min-h-auto md:min-h-[60vh] flex items-center justify-center bg-brand-dark px-6 py-16 md:py-32">
       <div ref={ref} className="max-w-4xl mx-auto text-center rtl:text-center">
         <motion.div
-          className="flex flex-wrap justify-center gap-x-2 gap-y-2 md:gap-x-4"
+          className="flex flex-wrap justify-center gap-x-1.5 gap-y-2 md:gap-x-4"
           variants={container}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
@@ -43,7 +43,7 @@ export default function Philosophy() {
               variants={child}
               className={`${
                 word.includes('الهدف') || word.includes('الأول') ? 'text-brand-gold' : 'text-brand-stone'
-              } text-3xl md:text-5xl lg:text-6xl font-serif leading-relaxed`}
+              } text-2xl md:text-5xl font-serif leading-relaxed`}
             >
               {word}
             </motion.span>
