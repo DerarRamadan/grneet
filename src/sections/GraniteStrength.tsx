@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import graniteImg from '../assets/images/s4.webp'
 
 export default function GraniteStrength() {
   return (
@@ -27,7 +28,7 @@ export default function GraniteStrength() {
       </div>
       <div className="flex-1 relative h-[50vh] md:h-auto order-1 md:order-2">
         <img
-          src="https://images.unsplash.com/photo-1621261329626-44477c7285a8?q=80&w=1200&auto=format&fit=crop"
+          src={graniteImg}
           alt="Granite Texture"
           className="absolute inset-0 w-full h-full object-cover grayscale contrast-125"
           loading="lazy"

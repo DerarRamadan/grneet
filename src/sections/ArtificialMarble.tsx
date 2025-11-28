@@ -1,4 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
+import artificialImg from '../assets/images/s6-artificial.webp'
+import naturalImg from '../assets/images/s6-natural.webp'
 import type { MouseEvent as ReactMouseEvent, TouchEvent as ReactTouchEvent } from 'react'
 
 export default function ArtificialMarble() {
@@ -49,18 +51,10 @@ export default function ArtificialMarble() {
         onTouchMove={onTouchMove}
         onClick={(e) => handleMove(e.clientX)}
       >
-        <img
-          src="https://images.unsplash.com/photo-1595846519845-68e298c2edd8?q=80&w=1600&auto=format&fit=crop"
-          alt="Artificial"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
+        <img src={artificialImg} alt="Artificial" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/20" />
         <div className="absolute inset-0 w-full h-full" style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}>
-          <img
-            src="https://images.unsplash.com/photo-1618221639252-9c3f4a4c6883?q=80&w=1600&auto=format&fit=crop"
-            alt="Natural"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
+          <img src={naturalImg} alt="Natural" className="absolute inset-0 w-full h-full object-cover" />
           <div className="absolute inset-0 bg-black/10" />
         </div>
         <div className="absolute top-0 bottom-0 w-1 bg-brand-gold z-20" style={{ left: `${sliderPosition}%` }}>

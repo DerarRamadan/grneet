@@ -1,4 +1,7 @@
 import { motion } from 'framer-motion'
+import img1 from '../assets/images/s5-1.webp'
+import img2 from '../assets/images/s5-2.webp'
+import img3 from '../assets/images/s5-3.webp'
 
 export default function Manufacturing() {
   return (
@@ -12,21 +15,9 @@ export default function Manufacturing() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {[
-            {
-              title: 'قص الليزر و Waterjet',
-              desc: 'دقة متناهية للحواف والزوايا المعقدة',
-              img: 'https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?q=80&w=800&auto=format&fit=crop',
-            },
-            {
-              title: 'معالجة الأسطح',
-              desc: 'جلي وتلميع بأعلى المعايير العالمية',
-              img: 'https://images.unsplash.com/photo-1617005082133-548c4dd27f35?q=80&w=800&auto=format&fit=crop',
-            },
-            {
-              title: 'التركيب',
-              desc: 'فريق هندسي متخصص للتنفيذ في الموقع',
-              img: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=800&auto=format&fit=crop',
-            },
+            { title: 'قص الليزر و Waterjet', desc: 'دقة متناهية للحواف والزوايا المعقدة', img: img1 },
+            { title: 'معالجة الأسطح', desc: 'جلي وتلميع بأعلى المعايير العالمية', img: img2 },
+            { title: 'التركيب', desc: 'فريق هندسي متخصص للتنفيذ في الموقع', img: img3 },
           ].map((item, i) => (
             <motion.div
               key={i}

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import heroPoster from '../assets/images/here-poster.webp'
-import heroWebm from '../assets/video/hero.webm'
-import heroMp4 from '../assets/video/hero.mp4'
+import heroVideoWebm from '../assets/video/hero.webm'
+import heroVideoMp4 from '../assets/video/hero.mp4'
 
 const container = {
   hidden: { opacity: 0 },
@@ -27,8 +27,8 @@ export default function Hero() {
         poster={heroPoster}
         className="absolute inset-0 w-full h-full object-cover"
       >
-        <source src={heroWebm} type="video/webm" />
-        <source src={heroMp4} type="video/mp4" />
+        <source src={heroVideoWebm} type="video/webm" />
+        <source src={heroVideoMp4} type="video/mp4" />
       </video>
       <div className="absolute inset-0 bg-black/50" />
       <div className="relative z-10 h-full flex flex-col items-center justify-center px-4 text-center">

@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
+import quarryImg from '../assets/images/yossanunj-T6HmS2NFaSM-unsplash.webp'
 
 export default function RawMaterial() {
   const containerRef = useRef<HTMLDivElement | null>(null)
@@ -15,12 +16,7 @@ export default function RawMaterial() {
     <section ref={containerRef} className="relative h-[80vh] w-full overflow-hidden flex items-center justify-center bg-brand-dark">
       <div className="absolute inset-0 z-0 bg-gradient-radial from-brand-charcoal to-brand-dark" />
       <motion.div style={{ y }} className="absolute inset-0 z-0">
-        <img
-          src="https://images.unsplash.com/photo-1599815049514-a952d7d8e8a6?q=80&w=2070&auto=format&fit=crop"
-          alt="محجر رخام"
-          className="w-full h-[120%] object-cover brightness-50"
-          loading="lazy"
-        />
+        <img src={quarryImg} alt="محجر رخام" className="w-full h-[120%] object-cover brightness-50" loading="lazy" />
       </motion.div>
 
       <motion.div style={{ opacity }} className="relative z-10 text-center p-8 md:p-12 border border-white/10 bg-black/40 backdrop-blur-md max-w-3xl mx-4">

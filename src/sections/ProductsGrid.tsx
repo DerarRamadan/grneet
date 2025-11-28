@@ -1,11 +1,16 @@
 import { motion } from 'framer-motion'
+import p1 from '../assets/images/s8-1.webp'
+import p2 from '../assets/images/s8-2.webp'
+import p3 from '../assets/images/s8-3.webp'
+import p4 from '../assets/images/s8-4.webp'
+import p5 from '../assets/images/s8-5.webp'
 
 const items = [
-  { id: 1, title: 'أدراج رخامية', size: 'large', img: 'https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=600&auto=format&fit=crop' },
-  { id: 2, title: 'أرضيات فاخرة', size: 'small', img: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=600&auto=format&fit=crop' },
-  { id: 3, title: 'مغاسل', size: 'small', img: 'https://images.unsplash.com/photo-1584622050111-993a426fbf0a?q=80&w=600&auto=format&fit=crop' },
-  { id: 4, title: 'واجهات', size: 'large', img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=600&auto=format&fit=crop' },
-  { id: 5, title: 'ديكور جداري', size: 'small', img: 'https://images.unsplash.com/photo-1512915922610-d313a778045a?q=80&w=600&auto=format&fit=crop' },
+  { id: 1, title: 'أدراج رخامية', size: 'large', img: p1 },
+  { id: 2, title: 'أرضيات فاخرة', size: 'small', img: p2 },
+  { id: 3, title: 'مغاسل', size: 'small', img: p3 },
+  { id: 4, title: 'واجهات', size: 'large', img: p4 },
+  { id: 5, title: 'ديكور جداري', size: 'small', img: p5 },
 ]
 
 export default function ProductsGrid() {

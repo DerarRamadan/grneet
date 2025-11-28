@@ -1,15 +1,23 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
+import img1 from '../assets/images/s3-1.webp'
+import img2 from '../assets/images/s3-2.webp'
+import img3 from '../assets/images/s3-3.webp'
+import img4 from '../assets/images/s3-4.webp'
+import img5 from '../assets/images/s3-5.webp'
+import img6 from '../assets/images/s3-6.webp'
+import img7 from '../assets/images/s3-7.webp'
+import img8 from '../assets/images/s3-8.webp'
 
 const products = [
-  { id: 1, name: 'بيانكو كرارا', category: 'إيطالي', img: 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?q=80&w=600&auto=format&fit=crop' },
-  { id: 2, name: 'إمبرادور غامق', category: 'إسباني', img: 'https://images.unsplash.com/photo-1615800098779-1be32e60cca3?q=80&w=600&auto=format&fit=crop' },
-  { id: 3, name: 'ترافرتين سلفر', category: 'تركي', img: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=600&auto=format&fit=crop' },
-  { id: 4, name: 'بورتورو جولد', category: 'نادر', img: 'https://images.unsplash.com/photo-1617791160588-241658c0f566?q=80&w=600&auto=format&fit=crop' },
-  { id: 5, name: 'كلكتا جولد', category: 'إيطالي', img: 'https://images.unsplash.com/photo-1618221639252-9c3f4a4c6883?q=80&w=600&auto=format&fit=crop' },
-  { id: 6, name: 'جرانيت أسود', category: 'هندي', img: 'https://images.unsplash.com/photo-1621261329626-44477c7285a8?q=80&w=600&auto=format&fit=crop' },
-  { id: 7, name: 'روزا برتغال', category: 'برتغالي', img: 'https://images.unsplash.com/photo-1618221639252-9c3f4a4c6883?q=80&w=600&auto=format&fit=crop' },
-  { id: 8, name: 'فيردي غواتيمالا', category: 'أخضر', img: 'https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=600&auto=format&fit=crop' },
+  { id: 1, name: 'بيانكو كرارا', category: 'إيطالي', img: img1 },
+  { id: 2, name: 'إمبرادور غامق', category: 'إسباني', img: img2 },
+  { id: 3, name: 'ترافرتين سلفر', category: 'تركي', img: img3 },
+  { id: 4, name: 'بورتورو جولد', category: 'نادر', img: img4 },
+  { id: 5, name: 'كلكتا جولد', category: 'إيطالي', img: img5 },
+  { id: 6, name: 'جرانيت أسود', category: 'هندي', img: img6 },
+  { id: 7, name: 'روزا برتغال', category: 'برتغالي', img: img7 },
+  { id: 8, name: 'فيردي غواتيمالا', category: 'أخضر', img: img8 },
 ]
 
 export default function Gallery() {
