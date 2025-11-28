@@ -11,7 +11,7 @@ export default function CustomWorks() {
   }
 
   return (
-    <section onMouseMove={handleMouseMove} className="relative h-screen bg-black flex items-center justify-center overflow-hidden cursor-none">
+    <section id="custom" onMouseMove={handleMouseMove} className="relative h-screen bg-black flex items-center justify-center overflow-hidden cursor-none">
       <div className="absolute inset-0 opacity-20">
         <img src={customImg} alt="Sculpture" className="w-full h-full object-cover grayscale" />
       </div>

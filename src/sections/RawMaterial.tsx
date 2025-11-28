@@ -13,7 +13,7 @@ export default function RawMaterial() {
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.9, 1], [0, 1, 1, 0])
 
   return (
-    <section ref={containerRef} className="relative h-[80vh] w-full overflow-hidden flex items-center justify-center bg-brand-dark">
+    <section id="raw-material" ref={containerRef} className="relative h-[80vh] w-full overflow-hidden flex items-center justify-center bg-brand-dark">
       <div className="absolute inset-0 z-0 bg-gradient-radial from-brand-charcoal to-brand-dark" />
       <motion.div style={{ y }} className="absolute inset-0 z-0">
         <img src={quarryImg} alt="محجر رخام" className="w-full h-[120%] object-cover brightness-50" loading="lazy" />

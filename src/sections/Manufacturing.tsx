@@ -5,7 +5,7 @@ import img3 from '../assets/images/s5-3.webp'
 
 export default function Manufacturing() {
   return (
-    <section className="relative py-32 bg-brand-charcoal overflow-hidden">
+    <section id="manufacturing" className="relative py-32 bg-brand-charcoal overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 relative z-10">
         <div className="flex flex-col md:flex-row items-end justify-between mb-16 border-b border-brand-stone/10 pb-8">
           <h2 className="text-4xl md:text-6xl font-serif text-white">دقة التصنيع</h2>

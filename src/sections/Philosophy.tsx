@@ -30,6 +30,7 @@ export default function Philosophy() {
 
   return (
     <motion.section
+      id="philosophy"
       className="h-[100dvh] flex items-center justify-center bg-brand-dark px-6 py-16 md:py-32 snap-start"
       initial={{ opacity: 0, scale: 0.98 }}
       whileInView={{ opacity: 1, scale: 1 }}

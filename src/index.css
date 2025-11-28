@@ -29,6 +29,14 @@ body {
   scroll-snap-type: y mandatory;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+.no-snap {
+  scroll-snap-type: none !important;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }

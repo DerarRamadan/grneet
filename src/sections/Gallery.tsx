@@ -26,7 +26,7 @@ export default function Gallery() {
   const x = useTransform(scrollYProgress, [0, 1], ['0%', '-60%'])
 
   return (
-    <section ref={targetRef} className="relative h-[300vh] bg-brand-charcoal" dir="ltr">
+    <section id="gallery" ref={targetRef} className="relative h-[300vh] bg-brand-charcoal" dir="ltr">
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
         <div className="absolute top-10 right-10 z-10 text-right" dir="rtl">
           <h3 className="text-4xl md:text-6xl font-serif text-brand-gold">مجموعتنا المختارة</h3>

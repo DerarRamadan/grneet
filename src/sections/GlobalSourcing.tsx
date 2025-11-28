@@ -14,7 +14,7 @@ export default function GlobalSourcing() {
   const [activeId, setActiveId] = useState<number | null>(null)
 
   return (
-    <section className="relative h-screen bg-brand-charcoal overflow-hidden flex flex-col items-center justify-center">
+    <section id="sourcing" className="relative h-screen bg-brand-charcoal overflow-hidden flex flex-col items-center justify-center snap-start">
       <div className="absolute top-10 z-10 text-center">
         <h2 className="text-brand-gold font-serif text-4xl tracking-wide">نستورد من العالم</h2>
         <p className="text-brand-stone/60 font-sans text-lg mt-2">من قلب المحاجر العالمية إلى طرابلس</p>

@@ -36,7 +36,7 @@ export default function ArtificialMarble() {
   }, [])
 
   return (
-    <section className="py-24 bg-brand-charcoal flex flex-col items-center justify-center select-none">
+    <section id="artificial" className="py-24 bg-brand-charcoal flex flex-col items-center justify-center select-none">
       <div className="text-center mb-12 px-4">
         <h2 className="text-brand-gولد font-serif text-4xl md:text-6xl mb-4">حلول عصرية</h2>
         <p className="text-brand-stone/70 font-sans text-lg max-w-2xl mx-auto">اختر ما يناسب مساحتك: دفء الرخام الطبيعي أو عملية الرخام الصناعي</p>
