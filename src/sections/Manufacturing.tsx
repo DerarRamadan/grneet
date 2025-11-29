@@ -1,11 +1,33 @@
-import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import img1 from '../assets/images/s5-1.webp'
 import img2 from '../assets/images/s5-2.webp'
 import img3 from '../assets/images/s5-3.webp'
 
+gsap.registerPlugin(ScrollTrigger)
+
 export default function Manufacturing() {
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useGSAP(() => {
+    gsap.from(".manuf-item-anim", {
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top 80%",
+        once: true
+      },
+      opacity: 0,
+      y: 30,
+      stagger: 0.2,
+      duration: 0.8,
+      ease: "power2.out"
+    })
+  }, { scope: containerRef })
+
   return (
-    <section id="manufacturing" className="relative py-32 bg-brand-charcoal overflow-hidden">
+    <section ref={containerRef} id="manufacturing" className="relative py-32 bg-brand-charcoal overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 relative z-10">
         <div className="flex flex-col md:flex-row items-end justify-between mb-16 border-b border-brand-stone/10 pb-8">
           <h2 className="text-4xl md:text-6xl font-serif text-white">دقة التصنيع</h2>
@@ -19,12 +41,9 @@ export default function Manufacturing() {
             { title: 'معالجة الأسطح', desc: 'جلي وتلميع بأعلى المعايير العالمية', img: img2 },
             { title: 'التركيب', desc: 'فريق هندسي متخصص للتنفيذ في الموقع', img: img3 },
           ].map((item, i) => (
-            <motion.div
+            <div
               key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.2 }}
-              className="group cursor-pointer"
+              className="manuf-item-anim group cursor-pointer"
             >
               <div className="h-80 overflow-hidden rounded-sm mb-6 border border-white/5">
                 <img
@@ -36,7 +55,7 @@ export default function Manufacturing() {
               </div>
               <h3 className="text-2xl font-serif text-brand-gold mb-3">{item.title}</h3>
               <p className="text-brand-stone/70 font-sans text-base leading-relaxed">{item.desc}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

@@ -1,5 +1,7 @@
-import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import img1 from '../assets/images/s3-1.webp'
 import img2 from '../assets/images/s3-2.webp'
 import img3 from '../assets/images/s3-3.webp'
@@ -8,6 +10,8 @@ import img5 from '../assets/images/s3-5.webp'
 import img6 from '../assets/images/s3-6.webp'
 import img7 from '../assets/images/s3-7.webp'
 import img8 from '../assets/images/s3-8.webp'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const products = [
   { id: 1, name: 'بيانكو كرارا', category: 'إيطالي', img: img1 },
@@ -21,18 +25,30 @@ const products = [
 ]
 
 export default function Gallery() {
-  const targetRef = useRef<HTMLDivElement | null>(null)
-  const { scrollYProgress } = useScroll({ target: targetRef })
-  const x = useTransform(scrollYProgress, [0, 1], ['0%', '-60%'])
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const galleryRef = useRef<HTMLDivElement>(null)
+
+  useGSAP(() => {
+    gsap.to(galleryRef.current, {
+      x: '-60%',
+      ease: 'none',
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1
+      }
+    })
+  }, { scope: sectionRef })
 
   return (
-    <section id="gallery" ref={targetRef} className="relative h-[300vh] bg-brand-charcoal" dir="ltr">
+    <section id="gallery" ref={sectionRef} className="relative h-[300vh] bg-brand-charcoal" dir="ltr">
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
         <div className="absolute top-10 right-10 z-10 text-right" dir="rtl">
           <h3 className="text-4xl md:text-6xl font-serif text-brand-gold">مجموعتنا المختارة</h3>
           <p className="text-brand-stone mt-2 font-sans text-xl">لمسة من الفخامة لكل زاوية</p>
         </div>
-        <motion.div style={{ x }} className="flex gap-8 pl-10 md:pl-20">
+        <div ref={galleryRef} className="flex gap-8 pl-10 md:pl-20">
           {products.map((product) => (
             <div
               key={product.id}
@@ -51,7 +67,7 @@ export default function Gallery() {
               </div>
             </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   )

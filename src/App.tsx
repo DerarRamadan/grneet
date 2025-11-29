@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { AnimatePresence } from 'framer-motion'
 import Preloader from './components/layout/Preloader'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
@@ -20,6 +19,7 @@ import Sustainability from './sections/Sustainability'
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true)
+  const [showPreloader, setShowPreloader] = useState(true)
 
   useEffect(() => {
     const t = setTimeout(() => setIsLoading(false), 2500)
@@ -28,9 +28,12 @@ export default function App() {
 
   return (
     <div className="min-h-screen">
-      <AnimatePresence mode="wait">
-        {isLoading && <Preloader visible={isLoading} />}
-      </AnimatePresence>
+      {showPreloader && (
+        <Preloader 
+          loading={isLoading} 
+          onComplete={() => setShowPreloader(false)} 
+        />
+      )}
       {!isLoading && (
         <>
           <Navbar />

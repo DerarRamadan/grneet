@@ -1,11 +1,43 @@
-import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
 import heroVideoWebm from '../../assets/video/hero.webm'
 import heroVideoMp4 from '../../assets/video/hero.mp4'
 import heroPoster from '../../assets/images/here-poster.webp'
 
 export default function Footer() {
+  const containerRef = useRef<HTMLElement>(null)
+  const buttonRef = useRef<HTMLAnchorElement>(null)
+
+  useGSAP(() => {
+    const button = buttonRef.current
+    if (!button) return
+
+    const onEnter = () => gsap.to(button, { scale: 1.05, duration: 0.3, ease: "power2.out" })
+    const onLeave = () => gsap.to(button, { scale: 1, duration: 0.3, ease: "power2.out" })
+    const onDown = () => gsap.to(button, { scale: 0.95, duration: 0.1 })
+    const onUp = () => gsap.to(button, { scale: 1.05, duration: 0.1 })
+
+    button.addEventListener('mouseenter', onEnter)
+    button.addEventListener('mouseleave', onLeave)
+    button.addEventListener('mousedown', onDown)
+    button.addEventListener('mouseup', onUp)
+    // Handle touch events for mobile "tap"
+    button.addEventListener('touchstart', onDown)
+    button.addEventListener('touchend', onUp)
+
+    return () => {
+      button.removeEventListener('mouseenter', onEnter)
+      button.removeEventListener('mouseleave', onLeave)
+      button.removeEventListener('mousedown', onDown)
+      button.removeEventListener('mouseup', onUp)
+      button.removeEventListener('touchstart', onDown)
+      button.removeEventListener('touchend', onUp)
+    }
+  }, { scope: containerRef })
+
   return (
-    <footer id="contact" className="relative bg-black text-white pt-24 pb-8 border-t border-brand-gold/30 overflow-hidden">
+    <footer id="contact" className="relative bg-black text-white pt-24 pb-8 border-t border-brand-gold/30 overflow-hidden" ref={containerRef}>
       <div className="absolute inset-0 z-0 pointer-events-none">
         <video
           autoPlay
@@ -33,14 +65,13 @@ export default function Footer() {
               نحن هنا لتحويل رؤيتك المعمارية إلى واقع ملموس بأجود أنواع الحجر الطبيعي.
             </p>
           </div>
-          <motion.a
+          <a
+            ref={buttonRef}
             href="https://wa.me/218917080090"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
             className="w-full md:w-auto bg-brand-gold/90 hover:bg-brand-gold text-black px-8 py-5 rounded-xl font-bold text-xl flex items-center justify-center md:justify-start gap-3 shadow-[0_20px_40px_rgba(212,175,55,0.25)] transition-colors"
           >
             <span>↗</span> تواصل معنا عبر واتساب
-          </motion.a>
+          </a>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 border-t border-white/10 pt-16 mb-16">
           <div className="relative text-right bg-gradient-to-b from-black/30 to-black/20 backdrop-blur-sm border border-white/10 rounded-xl p-6 shadow-[0_15px_40px_rgba(0,0,0,0.25)]">

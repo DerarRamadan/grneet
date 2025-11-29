@@ -1,8 +1,13 @@
-import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import p1 from '../assets/images/projects-1.webp'
 import p2 from '../assets/images/projects-2.webp'
 import p3 from '../assets/images/projects-3.webp'
 import p4 from '../assets/images/projects-4.webp'
+
+gsap.registerPlugin(ScrollTrigger)
 
 type Project = { id: number; title: string; location: string; img: string }
 
@@ -30,12 +35,24 @@ export default function Projects() {
 }
 
 function Card({ project, index }: { project: Project; index: number }) {
+  const cardRef = useRef<HTMLDivElement>(null)
+
+  useGSAP(() => {
+    gsap.from(cardRef.current, {
+      scrollTrigger: {
+        trigger: cardRef.current,
+        start: "top 90%",
+        once: true
+      },
+      opacity: 0,
+      y: 50,
+      duration: 0.6
+    })
+  }, { scope: cardRef })
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-100px' }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
+    <div
+      ref={cardRef}
       className="sticky top-24 bg-brand-charcoal border border-white/5 rounded-lg overflow-hidden shadow-2xl h-[500px] flex flex-col md:flex-row"
     >
       <div className="w-full md:w-1/2 h-64 md:h-full relative">
@@ -53,6 +70,6 @@ function Card({ project, index }: { project: Project; index: number }) {
           تم توريد وتركيب أفخم أنواع الرخام والجرانيت وفق أعلى المواصفات الهندسية.
         </p>
       </div>
-    </motion.div>
+    </div>
   )
 }

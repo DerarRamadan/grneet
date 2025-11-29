@@ -1,62 +1,66 @@
-import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const phrase = "الرخام ليس مجرد حجر؛ إنه تاريخ، ضغط، وزمن صيغ عبر ملايين السنين. في شركة الهدف الأول، لا نبيع المواد فحسب، بل ننتقي لك أرقى كنوز الأرض لتبني إرثاً يدوم."
 
 export default function Philosophy() {
-  const ref = useRef<HTMLDivElement | null>(null)
-  const isInView = useInView(ref, { once: true, margin: '-10%' })
-
+  const containerRef = useRef<HTMLDivElement>(null)
   const words = phrase.split(' ')
 
-  const container = {
-    hidden: { opacity: 0 },
-    visible: (i = 1) => ({
-      opacity: 1,
-      transition: { staggerChildren: 0.08, delayChildren: 0.02 * i },
-    }),
-  }
+  useGSAP(() => {
+    // Section entry
+    gsap.from(containerRef.current, {
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top 80%",
+        once: true
+      },
+      opacity: 0,
+      scale: 0.98,
+      duration: 0.6,
+      ease: "power2.out"
+    })
 
-  const child = {
-    visible: {
-      opacity: 1,
-      y: 0,
-    },
-    hidden: {
+    // Word staggering
+    gsap.from(".word-anim", {
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top 80%",
+        once: true
+      },
       opacity: 0,
       y: 20,
-    },
-  }
+      stagger: 0.08,
+      delay: 0.2,
+      duration: 0.5,
+      ease: "power2.out"
+    })
+  }, { scope: containerRef })
 
   return (
-    <motion.section
+    <section
       id="philosophy"
+      ref={containerRef}
       className="h-[100dvh] flex items-center justify-center bg-brand-dark px-6 py-16 md:py-32 snap-start"
-      initial={{ opacity: 0, scale: 0.98 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true, amount: 0.6 }}
     >
-      <div ref={ref} className="max-w-4xl mx-auto text-center rtl:text-center">
-        <motion.div
-          className="flex flex-wrap justify-center gap-x-1.5 gap-y-2 md:gap-x-4"
-          variants={container}
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-        >
+      <div className="max-w-4xl mx-auto text-center rtl:text-center">
+        <div className="flex flex-wrap justify-center gap-x-1.5 gap-y-2 md:gap-x-4">
           {words.map((word, index) => (
-            <motion.span
+            <span
               key={index}
-              variants={child}
-              className={`${
+              className={`word-anim inline-block ${
                 word.includes('الهدف') || word.includes('الأول') ? 'text-brand-gold' : 'text-brand-stone'
               } text-2xl md:text-5xl font-serif leading-relaxed`}
             >
               {word}
-            </motion.span>
+            </span>
           ))}
-        </motion.div>
+        </div>
       </div>
-    </motion.section>
+    </section>
   )
 }

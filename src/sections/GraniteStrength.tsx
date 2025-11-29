@@ -1,20 +1,40 @@
-import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import graniteImg from '../assets/images/s4.webp'
 
+gsap.registerPlugin(ScrollTrigger)
+
 export default function GraniteStrength() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const textRef = useRef<HTMLHeadingElement>(null)
+
+  useGSAP(() => {
+    gsap.from(textRef.current, {
+      scrollTrigger: {
+        trigger: textRef.current,
+        start: "top 80%",
+        once: true
+      },
+      opacity: 0,
+      x: -50,
+      duration: 0.8,
+      ease: "power2.out"
+    })
+  }, { scope: containerRef })
+
   return (
-    <section className="relative flex flex-col md:flex-row min-h-screen bg-brand-dark">
+    <section ref={containerRef} className="relative flex flex-col md:flex-row min-h-screen bg-brand-dark">
       <div className="flex-1 flex items-center justify-center p-8 md:p-24 order-2 md:order-1">
         <div className="max-w-xl text-right">
-          <motion.h2
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+          <h2
+            ref={textRef}
             className="text-4xl md:text-6xl font-serif text-white mb-8 leading-tight"
           >
             صلابة <br />
             <span className="text-brand-stone/50">تتحدى الزمن</span>
-          </motion.h2>
+          </h2>
           <p className="text-lg md:text-xl text-brand-stone/80 font-sans leading-loose mb-8">
             الجرانيت هو الخيار الأمثل للواجهات الخارجية والأماكن ذات الحركة الكثيفة. في "الهدف الأول"، نوفر لك جرانيت عالي الكثافة يقاوم العوامل الجوية، الحرارة، والخدش، ليظل محافظاً على رونقه لعقود.
           </p>

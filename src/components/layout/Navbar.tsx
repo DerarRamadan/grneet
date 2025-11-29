@@ -1,27 +1,51 @@
-import { useState } from 'react'
-import { motion, AnimatePresence, animate } from 'framer-motion'
+import { useState, useEffect, useRef } from 'react'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
+
+gsap.registerPlugin(ScrollToPlugin)
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const [isMenuRendered, setIsMenuRendered] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
 
-  const menuVariants = {
-    closed: { x: '100%', opacity: 0 },
-    open: { x: 0, opacity: 1, transition: { duration: 0.4 } },
-  }
+  useEffect(() => {
+    if (isOpen) setIsMenuRendered(true)
+  }, [isOpen])
+
+  useGSAP(() => {
+    if (isOpen && menuRef.current) {
+      gsap.fromTo(menuRef.current,
+        { x: '100%', opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.4, ease: "power2.out" }
+      )
+    } else if (!isOpen && isMenuRendered && menuRef.current) {
+      gsap.to(menuRef.current, {
+        x: '100%',
+        opacity: 0,
+        duration: 0.4,
+        ease: "power2.in",
+        onComplete: () => setIsMenuRendered(false)
+      })
+    }
+  }, { dependencies: [isOpen, isMenuRendered] })
 
   const scrollToId = (id: string) => {
     const el = document.getElementById(id) || (document.querySelector(`[id="${id}"]`) as HTMLElement | null)
     const header = document.querySelector('header') as HTMLElement | null
     const offset = header ? header.offsetHeight : 0
     if (!el) return
-    const start = window.scrollY
+    
+    // const start = window.scrollY
     const end = el.getBoundingClientRect().top + window.scrollY - offset
+    
     document.body.classList.add('no-snap')
-    animate(0, end - start, {
+    gsap.to(window, {
       duration: 0.85,
-      ease: [0.33, 1, 0.68, 1],
-      onUpdate: (latest) => window.scrollTo(0, start + latest),
-      onComplete: () => document.body.classList.remove('no-snap'),
+      scrollTo: { y: end, autoKill: false },
+      ease: "power2.inOut", // Approximate to [0.33, 1, 0.68, 1]
+      onComplete: () => document.body.classList.remove('no-snap')
     })
   }
 
@@ -49,43 +73,35 @@ export default function Navbar() {
             </a>
           </nav>
 
-          <button onClick={() => setIsOpen(!isOpen)} className="md:hidden z-50 flex flex-col gap-1.5 p-2">
-            <motion.span
-              animate={isOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
-              className="w-8 h-0.5 bg-brand-gold block origin-center transition-transform"
+          <button onClick={() => setIsOpen(!isOpen)} className="md:hidden z-50 flex flex-col gap-1.5 p-2 group">
+            <span
+              className={`w-8 h-0.5 bg-brand-gold block origin-center transition-transform duration-300 ${isOpen ? 'rotate-45 translate-y-2' : ''}`}
             />
-            <motion.span
-              animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
-              className="w-8 h-0.5 bg-brand-gold block transition-opacity"
+            <span
+              className={`w-8 h-0.5 bg-brand-gold block transition-opacity duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'}`}
             />
-            <motion.span
-              animate={isOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
-              className="w-8 h-0.5 bg-brand-gold block origin-center transition-transform"
+            <span
+              className={`w-8 h-0.5 bg-brand-gold block origin-center transition-transform duration-300 ${isOpen ? '-rotate-45 -translate-y-2' : ''}`}
             />
           </button>
         </div>
       </header>
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial="closed"
-            animate="open"
-            exit="closed"
-            variants={menuVariants}
-            className="fixed inset-0 z-40 bg-brand-dark/95 backdrop-blur-xl flex flex-col items-center justify-center text-center space-y-8 md:hidden"
-          >
-            <button onClick={() => { setIsOpen(false); scrollToId('home') }} className="text-3xl font-serif text-white hover:text-brand-gold">الرئيسية</button>
-            <button onClick={() => { setIsOpen(false); scrollToId('philosophy') }} className="text-3xl font-serif text-white hover:text-brand-gold">فلسفتنا</button>
-            <button onClick={() => { setIsOpen(false); scrollToId('collection') }} className="text-3xl font-serif text-white hover:text-brand-gold">منتجاتنا</button>
-            <button onClick={() => { setIsOpen(false); scrollToId('gallery') }} className="text-3xl font-serif text-white hover:text-brand-gold">المعرض</button>
-            <button onClick={() => { setIsOpen(false); scrollToId('sourcing') }} className="text-3xl font-serif text-white hover:text-brand-gold">المصادر العالمية</button>
-            <button onClick={() => { setIsOpen(false); scrollToId('manufacturing') }} className="text-3xl font-serif text-white hover:text-brand-gold">التصنيع</button>
-            <button onClick={() => { setIsOpen(false); scrollToId('projects') }} className="text-3xl font-serif text-white hover:text-brand-gold">مشاريعنا</button>
-            <a href="#contact" onClick={() => setIsOpen(false)} className="text-3xl font-serif text-brand-gold border-b border-brand-gold pb-2">اتصل بنا</a>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {isMenuRendered && (
+        <div
+          ref={menuRef}
+          className="fixed inset-0 z-40 bg-brand-dark/95 backdrop-blur-xl flex flex-col items-center justify-center text-center space-y-8 md:hidden"
+        >
+          <button onClick={() => { setIsOpen(false); scrollToId('home') }} className="text-3xl font-serif text-white hover:text-brand-gold">الرئيسية</button>
+          <button onClick={() => { setIsOpen(false); scrollToId('philosophy') }} className="text-3xl font-serif text-white hover:text-brand-gold">فلسفتنا</button>
+          <button onClick={() => { setIsOpen(false); scrollToId('collection') }} className="text-3xl font-serif text-white hover:text-brand-gold">منتجاتنا</button>
+          <button onClick={() => { setIsOpen(false); scrollToId('gallery') }} className="text-3xl font-serif text-white hover:text-brand-gold">المعرض</button>
+          <button onClick={() => { setIsOpen(false); scrollToId('sourcing') }} className="text-3xl font-serif text-white hover:text-brand-gold">المصادر العالمية</button>
+          <button onClick={() => { setIsOpen(false); scrollToId('manufacturing') }} className="text-3xl font-serif text-white hover:text-brand-gold">التصنيع</button>
+          <button onClick={() => { setIsOpen(false); scrollToId('projects') }} className="text-3xl font-serif text-white hover:text-brand-gold">مشاريعنا</button>
+          <a href="#contact" onClick={() => setIsOpen(false)} className="text-3xl font-serif text-brand-gold border-b border-brand-gold pb-2">اتصل بنا</a>
+        </div>
+      )}
     </>
   )
 }

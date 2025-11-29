@@ -26,15 +26,14 @@ body {
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-y;
-  scroll-snap-type: y mandatory;
 }
 
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; - Removed to avoid conflict with Lenis/GSAP */
 }
 
 .no-snap {
-  scroll-snap-type: none !important;
+  /* scroll-snap-type: none !important; - Deprecated */
 }
 
 ::-webkit-scrollbar {

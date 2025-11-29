@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import { useState } from 'react'
 import worldMap from '../assets/images/world-map.svg'
 
@@ -35,14 +34,14 @@ export default function GlobalSourcing() {
             <div className="absolute -inset-2 bg-brand-gold/30 rounded-full animate-ping"></div>
             <div className="relative w-3 h-3 bg-brand-gold rounded-full shadow-[0_0_10px_#D4AF37]"></div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: activeId === loc.id ? 1 : 0, y: activeId === loc.id ? -10 : 10 }}
-              className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-40 bg-black/90 border border-brand-gold/30 p-3 rounded text-center pointer-events-none z-20"
+            <div
+              className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-40 bg-black/90 border border-brand-gold/30 p-3 rounded text-center pointer-events-none z-20 transition-all duration-300 ${
+                activeId === loc.id ? 'opacity-100 -translate-y-2' : 'opacity-0 translate-y-2'
+              }`}
             >
               <h4 className="text-brand-gold font-serif text-lg">{loc.country}</h4>
               <p className="text-white/70 text-xs font-sans mt-1">{loc.material}</p>
-            </motion.div>
+            </div>
           </div>
         ))}
       </div>
