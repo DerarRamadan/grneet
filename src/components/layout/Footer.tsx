@@ -45,7 +45,7 @@ export default function Footer() {
           muted
           playsInline
           poster={heroPoster}
-          className="w-full h-full object-cover opacity-50 md:opacity-40 brightness-110 saturate-120"
+          className="w-full h-full object-cover opacity-40"
         >
           <source src={heroVideoWebm} type="video/webm" />
           <source src={heroVideoMp4} type="video/mp4" />

@@ -8,7 +8,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const lenis = new Lenis({ lerp: 0.1 })
+const lenis = new Lenis({
+  lerp: 0.15, // Increased for snappier response (less "floaty")
+  wheelMultiplier: 1.2, // Slightly faster scrolling
+})
 
 // Synchronize Lenis with GSAP ScrollTrigger
 lenis.on('scroll', ScrollTrigger.update)

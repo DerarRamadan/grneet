@@ -20,7 +20,7 @@ export default function Vision() {
       <div className="flex whitespace-nowrap overflow-hidden">
         <div
           ref={sliderRef}
-          className="flex gap-20 text-brand-dark font-serif text-6xl md:text-8xl font-bold tracking-tight"
+          className="flex gap-20 text-brand-dark font-serif text-6xl md:text-8xl font-bold tracking-tight will-change-transform"
         >
           <span>الجودة</span>
           <span>•</span>
