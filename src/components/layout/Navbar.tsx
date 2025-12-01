@@ -54,7 +54,7 @@ export default function Navbar() {
       <header className="fixed top-0 left-0 right-0 z-50 w-full bg-brand-dark/10 backdrop-blur-md border-b border-white/5 transition-all duration-300">
         <div className="mx-auto max-w-7xl px-6 py-5 flex items-center justify-between">
           <span className="font-serif text-2xl md:text-3xl font-bold text-brand-gold tracking-widest cursor-pointer z-50 relative">
-            الهدف الأول
+            القاضي للرخام
           </span>
 
           <nav className="hidden md:flex items-center gap-8 text-base font-medium text-brand-stone/90 font-sans">

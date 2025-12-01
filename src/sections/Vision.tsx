@@ -28,7 +28,7 @@ export default function Vision() {
           <span>•</span>
           <span>الريادة</span>
           <span>•</span>
-          <span>الهدف الأول</span>
+          <span>القاضي للرخام</span>
           <span>•</span>
           <span>الجودة</span>
           <span>•</span>
@@ -36,7 +36,7 @@ export default function Vision() {
           <span>•</span>
           <span>الريادة</span>
           <span>•</span>
-          <span>الهدف الأول</span>
+          <span>القاضي للرخام</span>
         </div>
       </div>
     </section>

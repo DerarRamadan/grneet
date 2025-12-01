@@ -52,7 +52,7 @@ export default function Preloader({ loading, onComplete }: PreloaderProps) {
           ref={titleRef}
           className="text-4xl md:text-6xl font-serif font-bold text-brand-gold"
         >
-          الهدف الأول
+          القاضي للرخام
         </h1>
 
         <div

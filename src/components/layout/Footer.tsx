@@ -111,7 +111,7 @@ export default function Footer() {
             <a href="#" className="hover:text-brand-gold">Facebook</a>
             <a href="#" className="hover:text-brand-gold">LinkedIn</a>
           </div>
-          <p>© 2025 الهدف الأول للرخام والجرانيت. جميع الحقوق محفوظة.</p>
+          <p>© 2025 القاضي للرخام. جميع الحقوق محفوظة.</p>
         </div>
       </div>
     </footer>

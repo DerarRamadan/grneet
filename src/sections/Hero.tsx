@@ -42,7 +42,7 @@ export default function Hero() {
           </h1>
           <div className="hero-anim mt-6 md:mt-10 flex flex-col items-center gap-6">
             <p className="font-sans text-lg md:text-2xl text-gray-200 max-w-2xl leading-relaxed">
-              الهدف الأول: نعيد صياغة مفهوم الفخامة في ليبيا
+              القاضي للرخام: نعيد صياغة مفهوم الفخامة في ليبيا
             </p>
             <div className="h-16 w-[1px] bg-gradient-to-b from-brand-gold to-transparent mt-4 animate-pulse"></div>
           </div>

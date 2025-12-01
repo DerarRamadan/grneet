@@ -36,7 +36,7 @@ export default function GraniteStrength() {
             <span className="text-brand-stone/50">تتحدى الزمن</span>
           </h2>
           <p className="text-lg md:text-xl text-brand-stone/80 font-sans leading-loose mb-8">
-            الجرانيت هو الخيار الأمثل للواجهات الخارجية والأماكن ذات الحركة الكثيفة. في "الهدف الأول"، نوفر لك جرانيت عالي الكثافة يقاوم العوامل الجوية، الحرارة، والخدش، ليظل محافظاً على رونقه لعقود.
+            الجرانيت هو الخيار الأمثل للواجهات الخارجية والأماكن ذات الحركة الكثيفة. في "القاضي للرخام"، نوفر لك جرانيت عالي الكثافة يقاوم العوامل الجوية، الحرارة، والخدش، ليظل محافظاً على رونقه لعقود.
           </p>
           <ul className="grid grid-cols-2 gap-y-6 gap-x-4 font-sans text-brand-gold text-lg">
             <li className="flex items-center gap-3"><span className="w-2 h-2 bg-brand-gold rounded-full flex-shrink-0" /> مقاوم للحرارة</li>
