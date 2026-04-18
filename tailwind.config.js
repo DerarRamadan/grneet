@@ -4,25 +4,21 @@ export default {
     './src/**/*.{js,ts,jsx,tsx}',
   ],
   safelist: [
-    'bg-brand-dark',
-    'bg-brand-dark/10',
-    'text-brand-stone',
-    'text-brand-gold',
-    'border-brand-gold',
-    'bg-brand-gold',
+    'bg-brand-navy',
+    'text-brand-gray',
+    'text-brand-blue',
   ],
   theme: {
     extend: {
       colors: {
-        'brand-dark': '#0a0a0a',
-        'brand-charcoal': '#1a1a1a',
-        'brand-gold': '#D4AF37',
-        'brand-gold-light': '#F4E5B8',
-        'brand-stone': '#E6E6E6',
+        'brand-navy': '#0F172A',
+        'brand-blue': '#0077B6',
+        'brand-lightBlue': '#00B4D8',
+        'brand-gray': '#F8FAFC',
       },
       fontFamily: {
-        serif: ['"Playfair Display"', 'serif'],
-        sans: ['"Manrope"', 'sans-serif'],
+        serif: ['"Tajawal"', 'serif'],
+        sans: ['"Tajawal"', 'sans-serif'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

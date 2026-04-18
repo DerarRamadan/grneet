@@ -1,54 +1,42 @@
-import { useRef } from 'react'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
+import { Building } from 'lucide-react'
 
 const clients = [
-  'شركة الإعمار',
-  'مجموعة القابضة',
-  'المكتب الهندسي الحديث',
-  'أبراج ليبيا',
-  'المتوسط للمقاولات',
-  'مؤسسة البنيان',
-  'الدار للتطوير',
-  'مجموعة الفنادق',
+  "شركة البريقة لتسويق النفط",
+  "شركة مصفاة الزاوية",
+  "جامعة الزاوية",
+  "جهاز تنفيذ مشروعات الإسكان والمرافق",
+  "مصلحة الطرق والجسور",
+  "صندوق الإنماء الاقتصادي والاجتماعي",
+  "وزارة المواصلات"
 ]
 
 export default function Clients() {
-  const containerRef = useRef<HTMLDivElement>(null)
-
-  useGSAP(() => {
-    gsap.from(".client-item", {
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top 80%",
-        once: true
-      },
-      opacity: 0,
-      y: 20,
-      stagger: 0.1,
-      duration: 0.5,
-      ease: "power2.out"
-    })
-  }, { scope: containerRef })
-
   return (
-    <section className="py-24 bg-brand-charcoal border-y border-white/5" ref={containerRef}>
-      <div className="max-w-7xl mx-auto px-6 text-center">
-        <h3 className="text-brand-gold font-serif text-2xl mb-12 opacity-80">شركاء النجاح</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-16">
-          {clients.map((client, i) => (
-            <div
-              key={i}
-              className="client-item text-xl md:text-2xl font-serif text-brand-stone/40 hover:text-white transition-colors duration-300"
-            >
+    <section id="clients" className="py-16 bg-brand-navy overflow-hidden relative border-y border-brand-blue/20">
+      
+      <div className="container mx-auto px-4 z-10 relative mb-10 text-center">
+        <h2 className="text-2xl md:text-4xl font-bold text-brand-white mb-2">شركاء النجاح</h2>
+        <p className="text-brand-lightBlue/80">نفخر بثقة كبرى الجهات السيادية وقطاع النفط</p>
+      </div>
+
+      <div className="relative w-full flex overflow-x-hidden">
+        <div className="animate-marquee whitespace-nowrap flex items-center min-w-full">
+          {clients.map((client, index) => (
+            <span key={index} className="mx-8 text-xl md:text-2xl font-bold text-slate-300/50 hover:text-brand-lightBlue transition-colors flex items-center gap-3">
+              <Building className="w-8 h-8 opacity-50" />
               {client}
-            </div>
+            </span>
+          ))}
+          {/* Duplicate for infinite effect */}
+          {clients.map((client, index) => (
+            <span key={`dup-${index}`} className="mx-8 text-xl md:text-2xl font-bold text-slate-300/50 hover:text-brand-lightBlue transition-colors flex items-center gap-3">
+              <Building className="w-8 h-8 opacity-50" />
+              {client}
+            </span>
           ))}
         </div>
       </div>
+
     </section>
   )
 }
