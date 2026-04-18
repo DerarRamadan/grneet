@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import Lenis from 'lenis'
 import Preloader from './components/layout/Preloader'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
@@ -19,13 +20,36 @@ export default function App() {
   const [showPreloader, setShowPreloader] = useState(true)
 
   useEffect(() => {
+    // Initialize Lenis smooth scroll with better settings for RTL/Mobile
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
+      infinite: false,
+    })
+
+    function raf(time: number) {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
+    }
+
+    requestAnimationFrame(raf)
+
     // Shorter preloader since everything is modern and lean
     const t = setTimeout(() => setIsLoading(false), 1500)
-    return () => clearTimeout(t)
+    
+    return () => {
+      clearTimeout(t)
+      lenis.destroy()
+    }
   }, [])
 
   return (
-    <div className="min-h-screen font-sans bg-brand-gray text-brand-navy">
+    <div className="min-h-screen font-sans bg-brand-gray text-brand-navy selection:bg-brand-blue selection:text-white overflow-x-hidden">
       {showPreloader && (
         <Preloader 
           loading={isLoading} 
@@ -33,7 +57,7 @@ export default function App() {
         />
       )}
       {!isLoading && (
-        <>
+        <div className="relative overflow-x-hidden">
           <Navbar />
           <main>
             <Hero />
@@ -48,8 +72,10 @@ export default function App() {
             <ContactForm />
           </main>
           <Footer />
-        </>
+        </div>
       )}
     </div>
   )
 }
+
+

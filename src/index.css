@@ -12,23 +12,53 @@
   --font-serif: "Tajawal", sans-serif;
 }
 
-html,
-body,
-#root {
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+  height: -webkit-fill-available;
+}
+
+body {
   min-height: 100%;
   margin: 0;
   padding: 0;
   background-color: var(--color-brand-gray);
   color: var(--color-brand-navy);
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+  font-family: var(--font-sans);
+  direction: rtl;
 }
 
-body {
+#root {
+  width: 100%;
+  position: relative;
   overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-  touch-action: pan-y;
-  overscroll-behavior: none;
-  font-family: var(--font-sans);
-  direction: rtl; /* Set RTL for arabic */
+}
+
+/* Lenis Recommended CSS */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
 }
 
 ::-webkit-scrollbar {
@@ -63,3 +93,4 @@ body {
   50% { transform: rotate(0); }
   100% { transform: rotate(0); }
 }
+
